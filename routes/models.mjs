@@ -1,5 +1,5 @@
 import express from 'express';
-import {MODELS, MODELS_MAP} from "./constant.mjs";
+import {MODELS, MODELS_MAP} from "../constant.mjs";
 
 const router = express.Router();
 
