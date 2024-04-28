@@ -152,7 +152,7 @@ export const MODELS_MAP = [
         }
     },
     {
-        name: "智谱",
+        name: "ChatGLM",
         doc_url: "https://open.bigmodel.cn/dev/howuse/model",
         models: {
             "GLM-4": [
@@ -297,16 +297,16 @@ export const MODELS_MAP = [
         name: "Meta",
         doc_url: "https://llama.meta.com",
         models: {
-            "Llama 3":[
-                    "llama-3-8b",
-                    "llama-3-70b",
+            "LLaMA 3": [
+                "llama-3-8b",
+                "llama-3-70b",
             ],
-            "Llama 2":[
-                    "llama-2-70b",
-                    "llama-2-13b",
-                    "llama-2-7b",
+            "LLaMA 2": [
+                "llama-2-70b",
+                "llama-2-13b",
+                "llama-2-7b",
             ],
-            "Code Llama":[
+            "Code LLaMA": [
                 "code-llama-34b",
                 "code-llama-13b",
                 "code-llama-7b",
@@ -325,6 +325,22 @@ export const MODELS_MAP = [
             "sonar-medium-online",
             "sonar-small-chat",
             "sonar-medium-chat",
+        ]
+    },
+    {
+        name: "LLaVA",
+        models: {}
+    },
+    {
+        name: "DBRX",
+        models: {}
+    },
+    {
+        name: "零一万物",
+        models: [
+            "yi-34b-chat-0205",
+            "yi-34b-chat-200k",
+            "yi-vl-plus",
         ]
     },
     {
