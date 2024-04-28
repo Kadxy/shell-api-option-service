@@ -3,6 +3,7 @@
 export const MODELS_MAP = [
     {
         name: "OpenAI",
+        doc_url: "https://openai.com/docs/models",
         models: {
             "Chat": {
                 "gpt-3.5-*": [
@@ -25,10 +26,12 @@ export const MODELS_MAP = [
                     "gpt-4-1106-preview",
                     "gpt-4-0125-preview",
                     "gpt-4-turbo-preview",
-                    "gpt-4-vision-preview"
+                    "gpt-4-vision-preview",
+                    "gpt-4-turbo",
+                    "gpt-4-turbo-2024-04-09"
                 ]
             },
-            "Embedding": [
+            "Embeddings": [
                 "text-embedding-ada-002",
                 "text-embedding-3-small",
                 "text-embedding-3-large",
@@ -39,19 +42,17 @@ export const MODELS_MAP = [
                 "text-ada-001",
                 "text-davinci-edit-001",
                 "code-davinci-edit-001",
-                "davinci-002",
-                "babbage-002"
             ],
             "Moderation": [
                 "text-moderation-latest",
                 " text-moderation-stable",
                 "text-moderation-007",
             ],
-            "Dall-E": [
+            "DALL-E": [
                 "dall-e-2",
                 "dall-e-3"
             ],
-            "Tts": [
+            "TTS": [
                 "tts-1",
                 "tts-1-1106",
                 "tts-1-hd",
@@ -59,6 +60,10 @@ export const MODELS_MAP = [
             ],
             "Whisper": [
                 "whisper-1"
+            ],
+            "GPT base": [
+                "davinci-002",
+                "babbage-002"
             ],
             "Plus": [
                 "gpt-4-gizmo-*",
@@ -68,12 +73,24 @@ export const MODELS_MAP = [
     },
     {
         name: "Google",
-        models: [
-            "search-serper",
-            "PaLM-2",
-            "gemini-pro",
-            "gemini-pro-vision"
-        ]
+        doc_url: "https://ai.google.dev",
+        models: {
+            "Gemma": [
+                "gemma-2b-it",
+                "gemma-7b-it",
+            ],
+            "Gemini": [
+                "gemini-pro",
+                "gemini-pro-1.5",
+                "gemini-pro-vision",
+            ],
+            "PaLM": [
+                "PaLM-2",
+            ],
+            "Search": [
+                "search-serper",
+            ]
+        }
     },
     {
         name: "Anthropic",
@@ -262,7 +279,74 @@ export const MODELS_MAP = [
             "moonshot-v1-32k",
             "moonshot-v1-128k"
         ]
-    }
+    },
+    {
+        name: "Mixtral",
+        doc_url: "https://docs.mistral.ai",
+        models: [
+            "open-mistral-7b",
+            "open-mixtral-8x7b",
+            "open-mixtral-8x22b",
+            "mistral-small-latest",
+            "mistral-medium-latest",
+            "mistral-large-latest",
+            "mistral-embed",
+        ]
+    },
+    {
+        name: "Meta",
+        doc_url: "https://llama.meta.com",
+        models: {
+            "Llama 3":[
+                    "llama-3-8b",
+                    "llama-3-70b",
+            ],
+            "Llama 2":[
+                    "llama-2-70b",
+                    "llama-2-13b",
+                    "llama-2-7b",
+            ],
+            "Code Llama":[
+                "code-llama-34b",
+                "code-llama-13b",
+                "code-llama-7b",
+                "codellama-70b-instruct",
+            ],
+        }
+    },
+    {
+        name: "Sonar",
+        models: [
+            "llama-3-sonar-small-32k-online",
+            "llama-3-sonar-small-32k-chat",
+            "llama-3-sonar-large-32k-online",
+            "llama-3-sonar-large-32k-chat",
+            "sonar-small-online",
+            "sonar-medium-online",
+            "sonar-small-chat",
+            "sonar-medium-chat",
+        ]
+    },
+    {
+        name: "Suno",
+        models: {
+            "Chat": [
+                "suno-v3"
+            ],
+            "Proxy": [
+                "chirp-v3-0",
+                "chirp-v2-xxl-alpha"
+            ]
+        }
+    },
+    {
+        name: "Pika Labs",
+        models: ["domo-video-to-video"]
+    },
+    {
+        name: "Domo AI",
+        models: ["domo-img-to-video"]
+    },
 ];
 
 export const convertModelsMapToModels = (modelsMap) => {
