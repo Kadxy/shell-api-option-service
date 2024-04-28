@@ -336,7 +336,8 @@ export const MODELS_MAP = [
         models: {}
     },
     {
-        name: "零一万物",
+        name: "01.AI",
+        doc_url: "https://www.lingyiwanwu.com",
         models: [
             "yi-34b-chat-0205",
             "yi-34b-chat-200k",
