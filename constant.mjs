@@ -1,6 +1,6 @@
 // noinspection SpellCheckingInspection
 
-function convertModelsMapToModels(modelsMap) {
+function convertModelsMapToTreeOptions(modelsMap) {
     const convertToModels = (obj) => {
         if (Array.isArray(obj)) {
             return obj.map((item) => {
@@ -33,6 +33,30 @@ function convertModelsMapToModels(modelsMap) {
             key: provider.name,
             children: convertToModels(provider.models),
         };
+    });
+}
+
+// --> {label: "model_name", value: "model_name"}[]
+function convertModelsMapToOptions(modelsMap) {
+    const extractModelNames = (obj) => {
+        if (Array.isArray(obj)) {
+            return obj.map((item) => {
+                return {
+                    label: item,
+                    value: item,
+                };
+            });
+        } else {
+            let models = [];
+            for (const value of Object.values(obj)) {
+                models = models.concat(extractModelNames(value));
+            }
+            return models;
+        }
+    };
+
+    return modelsMap.flatMap((provider) => {
+        return extractModelNames(provider.models);
     });
 }
 
@@ -402,4 +426,6 @@ export const MODELS_MAP = [
     },
 ];
 
-export const MODELS = convertModelsMapToModels(MODELS_MAP);
+export const TREE_MODELS_OPTIONS = convertModelsMapToTreeOptions(MODELS_MAP);
+
+export const MODELS_OPTIONS = convertModelsMapToOptions(MODELS_MAP);

@@ -1,5 +1,5 @@
 import express from 'express';
-import {MODELS, MODELS_MAP} from "../constant.mjs";
+import {TREE_MODELS_OPTIONS, MODELS_MAP, MODELS_OPTIONS} from "../constant.mjs";
 
 const router = express.Router();
 
@@ -9,7 +9,11 @@ router.get('/', function (req, res) {
 });
 
 router.get("/tree-option", function (req, res) {
-    res.json(MODELS);
+    res.json(TREE_MODELS_OPTIONS);
+});
+
+router.get("/option", function (req, res) {
+    res.json(MODELS_OPTIONS);
 });
 
 export default router;
