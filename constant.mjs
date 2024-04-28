@@ -1,5 +1,41 @@
 // noinspection SpellCheckingInspection
 
+function convertModelsMapToModels(modelsMap) {
+    const convertToModels = (obj) => {
+        if (Array.isArray(obj)) {
+            return obj.map((item) => {
+                if (typeof item === 'string') {
+                    return {
+                        title: item,
+                        value: item,
+                        key: item,
+                    };
+                } else {
+                    return convertToModels(item);
+                }
+            });
+        } else {
+            return Object.entries(obj).map(([key, value]) => {
+                return {
+                    title: key,
+                    value: key,
+                    key: key,
+                    children: convertToModels(value),
+                };
+            });
+        }
+    };
+
+    return modelsMap.map((provider) => {
+        return {
+            title: provider.name,
+            value: provider.name,
+            key: provider.name,
+            children: convertToModels(provider.models),
+        };
+    });
+}
+
 export const MODELS_MAP = [
     {
         name: "OpenAI",
@@ -365,41 +401,5 @@ export const MODELS_MAP = [
         models: ["domo-img-to-video"]
     },
 ];
-
-export const convertModelsMapToModels = (modelsMap) => {
-    const convertToModels = (obj) => {
-        if (Array.isArray(obj)) {
-            return obj.map((item) => {
-                if (typeof item === 'string') {
-                    return {
-                        title: item,
-                        value: item,
-                        key: item,
-                    };
-                } else {
-                    return convertToModels(item);
-                }
-            });
-        } else {
-            return Object.entries(obj).map(([key, value]) => {
-                return {
-                    title: key,
-                    value: key,
-                    key: key,
-                    children: convertToModels(value),
-                };
-            });
-        }
-    };
-
-    return modelsMap.map((provider) => {
-        return {
-            title: provider.name,
-            value: provider.name,
-            key: provider.name,
-            children: convertToModels(provider.models),
-        };
-    });
-};
 
 export const MODELS = convertModelsMapToModels(MODELS_MAP);
