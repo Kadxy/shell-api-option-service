@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.7'
 services:
   shell-api-option-service:
     image: kadxy/shell-api-option-service:latest
