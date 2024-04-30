@@ -1,44 +1,43 @@
 // noinspection SpellCheckingInspection
 function convertModelsMapToTreeOptions(modelsMap) {
-    const convertToModels = (obj, parentPath = '') => {
+    const convertToModels = (obj, parentPath = '', parentKey = '') => {
         if (Array.isArray(obj)) {
             return obj.map((item, index) => {
                 if (typeof item === 'string') {
-                    const value = `${parentPath}/${item}`;
-                    const key = `${parentPath}/${item}-${index}`;
+                    const key = `${parentKey}-${index}`;
                     return {
                         title: item,
-                        value: value,
+                        value: item,
                         key: key,
                     };
                 } else {
-                    return convertToModels(item, parentPath);
+                    return convertToModels(item, parentPath, parentKey);
                 }
             });
         } else {
             return Object.entries(obj).map(([key, value], index) => {
                 const currentPath = `${parentPath}/${key}`;
+                const currentKey = `${parentKey}-${key}-${index}`;
                 return {
                     title: key,
-                    value: currentPath,
-                    key: `${currentPath}-${index}`,
-                    children: convertToModels(value, currentPath),
+                    value: key,
+                    key: currentKey,
+                    children: convertToModels(value, currentPath, currentKey),
                 };
             });
         }
     };
 
     return modelsMap.map((provider, index) => {
-        const path = provider.name;
+        const key = `${provider.name}-${index}`;
         return {
             title: provider.name,
-            value: path,
-            key: `${path}-${index}`,
-            children: convertToModels(provider.models, path),
+            value: provider.name,
+            key: key,
+            children: convertToModels(provider.models, provider.name, key),
         };
     });
 }
-
 
 
 // --> {label: "model_name", value: "model_name"}[]
