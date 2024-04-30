@@ -1,12 +1,10 @@
 // noinspection SpellCheckingInspection
-
-// noinspection SpellCheckingInspection
 function convertModelsMapToTreeOptions(modelsMap) {
     const convertToModels = (obj, parentKey = '') => {
         if (Array.isArray(obj)) {
             return obj.map((item, index) => {
                 if (typeof item === 'string') {
-                    const key = `${parentKey}-${item}-${index}`;
+                    const key = `${parentKey}-${index}`;
                     return {
                         title: item,
                         value: item,
