@@ -1,42 +1,44 @@
 // noinspection SpellCheckingInspection
 function convertModelsMapToTreeOptions(modelsMap) {
-    const convertToModels = (obj, parentKey = '') => {
+    const convertToModels = (obj, parentPath = '') => {
         if (Array.isArray(obj)) {
             return obj.map((item, index) => {
                 if (typeof item === 'string') {
-                    const key = `${parentKey}-${index}`;
+                    const value = `${parentPath}/${item}`;
+                    const key = `${parentPath}/${item}-${index}`;
                     return {
                         title: item,
-                        value: item,
+                        value: value,
                         key: key,
                     };
                 } else {
-                    return convertToModels(item, parentKey);
+                    return convertToModels(item, parentPath);
                 }
             });
         } else {
             return Object.entries(obj).map(([key, value], index) => {
-                const currentKey = `${parentKey}-${key}-${index}`;
+                const currentPath = `${parentPath}/${key}`;
                 return {
                     title: key,
-                    value: key,
-                    key: currentKey,
-                    children: convertToModels(value, currentKey),
+                    value: currentPath,
+                    key: `${currentPath}-${index}`,
+                    children: convertToModels(value, currentPath),
                 };
             });
         }
     };
 
     return modelsMap.map((provider, index) => {
-        const key = `${provider.name}-${index}`;
+        const path = provider.name;
         return {
             title: provider.name,
-            value: provider.name,
-            key: key,
-            children: convertToModels(provider.models, key),
+            value: path,
+            key: `${path}-${index}`,
+            children: convertToModels(provider.models, path),
         };
     });
 }
+
 
 
 // --> {label: "model_name", value: "model_name"}[]
