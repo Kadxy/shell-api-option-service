@@ -19,7 +19,7 @@ function convertModelsMapToTreeOptions(modelsMap) {
                 const currentPath = `${parentPath}/${key}`;
                 return {
                     title: key,
-                    value: key,
+                    value: currentPath,
                     key: `${currentPath}-${index}`,
                     children: convertToModels(value, currentPath),
                 };
@@ -37,8 +37,6 @@ function convertModelsMapToTreeOptions(modelsMap) {
         };
     });
 }
-
-
 
 // --> {label: "model_name", value: "model_name"}[]
 function convertModelsMapToOptions(modelsMap) {
