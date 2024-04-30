@@ -1,40 +1,45 @@
 // noinspection SpellCheckingInspection
 
+// noinspection SpellCheckingInspection
 function convertModelsMapToTreeOptions(modelsMap) {
-    const convertToModels = (obj) => {
+    const convertToModels = (obj, parentKey = '') => {
         if (Array.isArray(obj)) {
             return obj.map((item, index) => {
                 if (typeof item === 'string') {
+                    const key = `${parentKey}-${item}-${index}`;
                     return {
                         title: item,
                         value: item,
-                        key: item - +index,
+                        key: key,
                     };
                 } else {
-                    return convertToModels(item);
+                    return convertToModels(item, parentKey);
                 }
             });
         } else {
             return Object.entries(obj).map(([key, value], index) => {
+                const currentKey = `${parentKey}-${key}-${index}`;
                 return {
                     title: key,
                     value: key,
-                    key: index + "-" + key,
-                    children: convertToModels(value),
+                    key: currentKey,
+                    children: convertToModels(value, currentKey),
                 };
             });
         }
     };
 
-    return modelsMap.map((provider) => {
+    return modelsMap.map((provider, index) => {
+        const key = `${provider.name}-${index}`;
         return {
             title: provider.name,
             value: provider.name,
-            key: provider.name,
-            children: convertToModels(provider.models),
+            key: key,
+            children: convertToModels(provider.models, key),
         };
     });
 }
+
 
 // --> {label: "model_name", value: "model_name"}[]
 function convertModelsMapToOptions(modelsMap) {
