@@ -3,23 +3,23 @@
 function convertModelsMapToTreeOptions(modelsMap) {
     const convertToModels = (obj) => {
         if (Array.isArray(obj)) {
-            return obj.map((item) => {
+            return obj.map((item, index) => {
                 if (typeof item === 'string') {
                     return {
                         title: item,
                         value: item,
-                        key: item,
+                        key: item - +index,
                     };
                 } else {
                     return convertToModels(item);
                 }
             });
         } else {
-            return Object.entries(obj).map(([key, value]) => {
+            return Object.entries(obj).map(([key, value], index) => {
                 return {
                     title: key,
                     value: key,
-                    key: key,
+                    key: index + "-" + key,
                     children: convertToModels(value),
                 };
             });
